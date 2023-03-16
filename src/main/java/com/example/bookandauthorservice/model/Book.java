@@ -7,6 +7,6 @@ import lombok.*;
 public class Book {
     private final int id;
     private String title;
-    private String author;
+    private int authorId;
     private int pages;
 }
