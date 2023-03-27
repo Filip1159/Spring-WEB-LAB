@@ -1,3 +1,125 @@
+DELETE http://localhost:8081/book/4
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+###
+
+POST http://localhost:8081/book
+Content-Type: application/json
+Content-Length: 51
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+"title": "Treny",
+"pages": 300,
+"authorIds": []
+}
+
+<> 2023-03-28T000258.200.json
+
+###
+
+POST http://localhost:8081/book
+Content-Length: 51
+Content-Type: */*; charset=UTF-8
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+"title": "Treny",
+"pages": 300,
+"authorIds": []
+}
+
+<> 2023-03-28T000247.415.json
+
+###
+
+GET http://localhost:8081/book/author/3
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-03-28T000148.200.json
+
+###
+
+GET http://localhost:8081/book/3
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-03-28T000115.200.json
+
+###
+
+GET http://localhost:8081/book/1
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-03-28T000109.200.json
+
+###
+
+GET http://localhost:8081/book/2
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-03-28T000100.200.json
+
+###
+
+GET http://localhost:8081/book/1
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-03-28T000044.200.json
+
+###
+
+GET http://localhost:8081/author/book/3
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-03-27T235956.200.json
+
+###
+
+GET http://localhost:8081/author/book/1
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-03-27T235923.200.json
+
+###
+
+GET http://localhost:8081/author
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-03-27T235845.200.json
+
+###
+
+GET http://localhost:8081/author/1
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-03-27T235603.200.json
+
+###
+
 GET http://localhost:8081/author/1
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)

@@ -2,8 +2,8 @@ package com.example.bookandauthorservice.controller;
 
 import com.example.bookandauthorservice.model.Author;
 import com.example.bookandauthorservice.model.AuthorDto;
-import com.example.bookandauthorservice.model.Book;
 import com.example.bookandauthorservice.service.IAuthorService;
+import com.example.bookandauthorservice.service.IBooksService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +17,7 @@ import static org.springframework.http.HttpStatus.CREATED;
 @RequestMapping("/author")
 public class AuthorController {
     private final IAuthorService authorService;
+    private final IBooksService booksService;
 
     @GetMapping("/{id}")
     Author getById(@PathVariable int id) {
@@ -35,11 +36,13 @@ public class AuthorController {
 
     @PostMapping
     ResponseEntity<Author> create(@RequestBody AuthorDto authorDto) {
+        authorDto.bookIds().forEach(booksService::getBook);  // validate all books exist
         return ResponseEntity.status(CREATED).body(authorService.create(authorDto));
     }
 
     @PutMapping("/{id}")
     Author update(@PathVariable int id, @RequestBody AuthorDto authorDto) {
+        authorDto.bookIds().forEach(booksService::getBook);  // validate all books exist
         return authorService.update(id, authorDto);
     }
 

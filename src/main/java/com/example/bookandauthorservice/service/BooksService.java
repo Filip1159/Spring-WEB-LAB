@@ -12,7 +12,6 @@ import java.util.*;
 @RequiredArgsConstructor
 public class BooksService implements IBooksService {
     private static final List<Book> booksRepo = new ArrayList<>();
-    private final IAuthorService authorService;
     private final IAuthorshipService authorshipService;
 
     static {
@@ -46,7 +45,6 @@ public class BooksService implements IBooksService {
         var newBookId = nextId();
         var newBook = new Book(newBookId, bookDto.title(), bookDto.pages());
         booksRepo.add(newBook);
-        bookDto.authorIds().forEach(authorService::getById);
         bookDto.authorIds().forEach(id -> authorshipService.saveNewAuthorship(id, newBookId));
         return newBook;
     }
@@ -55,7 +53,6 @@ public class BooksService implements IBooksService {
     public Book update(int id, BookDto bookDto) {
         var existingBook = getBook(id);
         existingBook.setTitle(bookDto.title());
-        bookDto.authorIds().forEach(authorService::getById);  // check if all authors exist
         var authorsOfExistingBook = authorshipService.getAuthorIdsForBookId(id);
         bookDto.authorIds().stream()  // add new authors
                 .filter(authorId -> !authorsOfExistingBook.contains(authorId))

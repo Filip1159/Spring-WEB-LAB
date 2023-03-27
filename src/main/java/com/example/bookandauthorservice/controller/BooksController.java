@@ -5,10 +5,13 @@ import com.example.bookandauthorservice.model.BookDto;
 import com.example.bookandauthorservice.service.IAuthorService;
 import com.example.bookandauthorservice.service.IBooksService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 import java.util.List;
+
+import static org.springframework.http.HttpStatus.CREATED;
 
 @RestController
 @RequiredArgsConstructor
@@ -33,12 +36,14 @@ public class BooksController {
     }
 
     @PostMapping
-    Book create(@RequestBody BookDto bookDto) {
-        return booksService.create(bookDto);
+    ResponseEntity<Book> create(@RequestBody BookDto bookDto) {
+        bookDto.authorIds().forEach(authorService::getById); // validate that all authors exist
+        return ResponseEntity.status(CREATED).body(booksService.create(bookDto));
     }
 
     @PutMapping("/{id}")
     Book update(@PathVariable int id, @RequestBody BookDto bookDto) {
+        bookDto.authorIds().forEach(authorService::getById);  // check if all authors exist
         return booksService.update(id, bookDto);
     }
 

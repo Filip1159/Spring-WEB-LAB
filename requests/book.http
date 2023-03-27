@@ -1,0 +1,27 @@
+### Get Dziady
+GET localhost:8081/book/3
+
+
+### Get all
+GET localhost:8081/book
+
+
+
+### Get books for author with id = 3
+GET localhost:8081/book/author/3
+
+
+
+### Create Treny
+POST localhost:8081/book
+Content-Type: application/json
+
+{
+  "title": "Treny",
+  "pages": 300,
+  "authorIds": []
+}
+
+
+### Delete Treny
+DELETE localhost:8081/book/4
