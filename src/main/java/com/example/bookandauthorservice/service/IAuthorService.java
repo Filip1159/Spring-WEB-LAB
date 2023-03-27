@@ -11,4 +11,5 @@ public interface IAuthorService {
     Author create(AuthorDto authorDto);
     Author update(int id, AuthorDto authorDto);
     void delete(int id);
+    List<Author> getByBookId(int bookId);
 }

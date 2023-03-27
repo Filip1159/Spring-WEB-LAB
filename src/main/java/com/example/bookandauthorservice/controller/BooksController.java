@@ -1,6 +1,5 @@
 package com.example.bookandauthorservice.controller;
 
-import com.example.bookandauthorservice.exception.UnknownAuthorException;
 import com.example.bookandauthorservice.model.Book;
 import com.example.bookandauthorservice.model.BookDto;
 import com.example.bookandauthorservice.service.IAuthorService;
@@ -9,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
-import java.util.Optional;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -29,26 +28,18 @@ public class BooksController {
     }
 
     @GetMapping("/author/{authorId}")
-    Optional<Book> getByAuthorId(@PathVariable int authorId) {
+    List<Book> getByAuthorId(@PathVariable int authorId) {
         return booksService.getByAuthorId(authorId);
     }
 
     @PostMapping
     Book create(@RequestBody BookDto bookDto) {
-        if (authorService.getById(bookDto.authorId()) != null) {
-            return booksService.create(bookDto);
-        } else {
-            throw new UnknownAuthorException(bookDto.authorId());
-        }
+        return booksService.create(bookDto);
     }
 
     @PutMapping("/{id}")
     Book update(@PathVariable int id, @RequestBody BookDto bookDto) {
-        if (authorService.getById(bookDto.authorId()) != null) {
-            return booksService.update(id, bookDto);
-        } else {
-            throw new UnknownAuthorException(bookDto.authorId());
-        }
+        return booksService.update(id, bookDto);
     }
 
     @DeleteMapping("/{id}")

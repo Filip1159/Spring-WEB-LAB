@@ -1,21 +1,22 @@
 package com.example.bookandauthorservice.controller;
 
-import com.example.bookandauthorservice.exception.CannotDeleteAuthorException;
 import com.example.bookandauthorservice.model.Author;
 import com.example.bookandauthorservice.model.AuthorDto;
+import com.example.bookandauthorservice.model.Book;
 import com.example.bookandauthorservice.service.IAuthorService;
-import com.example.bookandauthorservice.service.IBooksService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static org.springframework.http.HttpStatus.CREATED;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/author")
 public class AuthorController {
     private final IAuthorService authorService;
-    private final IBooksService booksService;
 
     @GetMapping("/{id}")
     Author getById(@PathVariable int id) {
@@ -27,9 +28,14 @@ public class AuthorController {
         return authorService.getAll();
     }
 
+    @GetMapping("/book/{bookId}")
+    List<Author> getByBookId(@PathVariable int bookId) {
+        return authorService.getByBookId(bookId);
+    }
+
     @PostMapping
-    Author create(@RequestBody AuthorDto authorDto) {
-        return authorService.create(authorDto);
+    ResponseEntity<Author> create(@RequestBody AuthorDto authorDto) {
+        return ResponseEntity.status(CREATED).body(authorService.create(authorDto));
     }
 
     @PutMapping("/{id}")
@@ -39,11 +45,6 @@ public class AuthorController {
 
     @DeleteMapping("/{id}")
     void delete(@PathVariable int id) {
-        var bookForAuthor = booksService.getByAuthorId(id);
-        if (bookForAuthor.isPresent()) {
-            throw new CannotDeleteAuthorException(id, bookForAuthor.get().getId());
-        } else {
-            authorService.delete(id);
-        }
+        authorService.delete(id);
     }
 }
