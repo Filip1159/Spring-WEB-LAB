@@ -20,6 +20,13 @@ public class AuthorService implements IAuthorService {
         authorRepo.add(new Author(1, "Adam", "Mickiweicz"));
         authorRepo.add(new Author(2, "Stanisław", "Reymont"));
         authorRepo.add(new Author(3, "Henryk", "Sienkiweicz"));
+        authorRepo.add(new Author(4, "William", "Szekspir"));
+        authorRepo.add(new Author(5, "Bolesław", "Prus"));
+        authorRepo.add(new Author(6, "Aleksander", "Fredro"));
+        authorRepo.add(new Author(7, "Juliusz", "Słowacki"));
+        authorRepo.add(new Author(8, "Witold", "Gombrowicz"));
+        authorRepo.add(new Author(9, "Hanna", "Mazur"));
+        authorRepo.add(new Author(10, "Zygmunt", "Mazur"));
     }
 
     @Override

@@ -23,5 +23,16 @@ Content-Type: application/json
 }
 
 
+### Update Potop
+PUT localhost:9000/book/1
+Content-Type: application/json
+
+{
+  "title": "Potop 2",
+  "pages": 2137,
+  "authorIds": [2, 3]
+}
+
+
 ### Delete Treny
 DELETE localhost:8081/book/4

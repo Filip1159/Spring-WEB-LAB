@@ -2,9 +2,9 @@ package com.example.bookandauthorservice.model;
 
 import java.util.List;
 
-public record BookDto(
+public record BookRequest(
         String title,
-        List<Integer> authorIds,
-        int pages
+        int pages,
+        List<Integer> authorIds
 ) {
 }

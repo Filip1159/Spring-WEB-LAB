@@ -1,7 +1,9 @@
 package com.example.bookandauthorservice.controller;
 
+import com.example.bookandauthorservice.model.Author;
 import com.example.bookandauthorservice.model.Book;
-import com.example.bookandauthorservice.model.BookDto;
+import com.example.bookandauthorservice.model.BookWithAuthors;
+import com.example.bookandauthorservice.model.BookRequest;
 import com.example.bookandauthorservice.service.IAuthorService;
 import com.example.bookandauthorservice.service.IBooksService;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +15,7 @@ import java.util.List;
 
 import static org.springframework.http.HttpStatus.CREATED;
 
+@CrossOrigin
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/book")
@@ -21,8 +24,8 @@ public class BooksController {
     private final IAuthorService authorService;
 
     @GetMapping
-    Collection<Book> getBooks() {
-        return booksService.getBooks();
+    Collection<BookWithAuthors> getBooks() {
+        return booksService.getBooksWithAuthors();
     }
 
     @GetMapping("/{id}")
@@ -36,15 +39,28 @@ public class BooksController {
     }
 
     @PostMapping
-    ResponseEntity<Book> create(@RequestBody BookDto bookDto) {
-        bookDto.authorIds().forEach(authorService::getById); // validate that all authors exist
-        return ResponseEntity.status(CREATED).body(booksService.create(bookDto));
+    ResponseEntity<BookWithAuthors> create(@RequestBody BookRequest bookRequest) {
+        bookRequest.authorIds().forEach(authorService::getById); // validate that all authors exist
+        var createdBook = booksService.create(bookRequest);
+        var response = new BookWithAuthors(
+                createdBook.getId(),
+                createdBook.getTitle(),
+                authorService.getByBookId(createdBook.getId()).stream().map(Author::getId).toList(),
+                createdBook.getPages()
+        );
+        return ResponseEntity.status(CREATED).body(response);
     }
 
     @PutMapping("/{id}")
-    Book update(@PathVariable int id, @RequestBody BookDto bookDto) {
-        bookDto.authorIds().forEach(authorService::getById);  // check if all authors exist
-        return booksService.update(id, bookDto);
+    BookWithAuthors update(@PathVariable int id, @RequestBody BookRequest bookRequest) {
+        bookRequest.authorIds().forEach(authorService::getById);  // check if all authors exist
+        var updatedBook = booksService.update(id, bookRequest);
+        return new BookWithAuthors(
+                updatedBook.getId(),
+                updatedBook.getTitle(),
+                authorService.getByBookId(updatedBook.getId()).stream().map(Author::getId).toList(),
+                updatedBook.getPages()
+        );
     }
 
     @DeleteMapping("/{id}")

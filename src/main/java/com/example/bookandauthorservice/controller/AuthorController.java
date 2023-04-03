@@ -12,6 +12,7 @@ import java.util.List;
 
 import static org.springframework.http.HttpStatus.CREATED;
 
+@CrossOrigin
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/author")

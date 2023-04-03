@@ -17,6 +17,17 @@ public class AuthorshipService implements IAuthorshipService {
         authorshipRepo.add(new Authorship(1, 3));
         authorshipRepo.add(new Authorship(2, 2));
         authorshipRepo.add(new Authorship(3, 1));
+        authorshipRepo.add(new Authorship(9, 14));
+        authorshipRepo.add(new Authorship(10, 14));
+        authorshipRepo.add(new Authorship(1, 5));
+        authorshipRepo.add(new Authorship(3, 6));
+        authorshipRepo.add(new Authorship(4, 7));
+        authorshipRepo.add(new Authorship(4, 8));
+        authorshipRepo.add(new Authorship(3, 9));
+        authorshipRepo.add(new Authorship(3, 10));
+        authorshipRepo.add(new Authorship(6, 11));
+        authorshipRepo.add(new Authorship(7, 12));
+        authorshipRepo.add(new Authorship(8, 13));
     }
 
     @Override

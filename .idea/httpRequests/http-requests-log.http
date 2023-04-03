@@ -1,3 +1,37 @@
+PUT http://localhost:9000/book/1
+Content-Type: application/json
+Content-Length: 64
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "title": "Potop 2",
+  "pages": 2137,
+  "authorIds": [2, 3]
+}
+
+<> 2023-04-03T163229.200.json
+
+###
+
+PUT http://localhost:8081/book/1
+Content-Type: application/json
+Content-Length: 64
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "title": "Potop 2",
+  "pages": 2137,
+  "authorIds": [2, 3]
+}
+
+<> 2023-04-03T163204.404.html
+
+###
+
 DELETE http://localhost:8081/book/4
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.6)
